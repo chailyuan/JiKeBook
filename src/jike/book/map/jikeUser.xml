@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="jike.book.mapper.CategoryMapper">
+
+		<select id="findbyid" parameterType="int" 
+		    resultType="jike.book.pojo.JiKeUser">
+		        select * from   jikeUser  where id= #{id}    
+		</select>
+		
+		<insert id="insertUser" parameterType="JiKeUser"
+			statementType="PREPARED" keyProperty="id"
+			useGeneratedKeys="true">
+			insert into jikeUser (userName,password) values
+			(#{userName},#{password})
+		
+		</insert>
+		
+		<update id="updateUser" parameterType="JiKeUser">
+			
+			UPDATE jikeUser SET userName=#{userName}, password=#{password} WHERE id = #{id}
+		
+		</update>
+		
+		<select id="loginSelect" resultType="JiKeUser" parameterType="hashmap">
+			select * from jikeUser where userName = #{userName} and password = #{password}
+		</select>
+		
+		<select id="login2Select" resultType="JiKeUser" parameterType="JiKeUser">
+			select * from jikeUser where userName = #{userName} and password = #{password}
+		</select>
+		
+		
+		<resultMap type="JiKeUser" id="JiKeUserMap">
+			<id property="id" column = "id"/>
+			<result property="userName" column ="userName"/>
+			<result property="password" column ="password"/>
+		</resultMap>
+		<select id="selectUsers" resultMap="JiKeUserMap">
+			select id,userName,password from jikeUser
+		</select>
+    
+	</mapper>
+
