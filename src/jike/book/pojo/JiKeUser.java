@@ -5,6 +5,18 @@ public class JiKeUser {
 	private String userName;
 	private String password;
 	
+	public JiKeUser() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public JiKeUser(String userName, String password) {
+		super();
+		this.userName = userName;
+		this.password = password;
+	}
+
+
 	public int getId() {
 		return id;
 	}

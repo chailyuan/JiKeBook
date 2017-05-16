@@ -8,6 +8,7 @@
 
 	<typeAliases>
     	<typeAlias alias = "JiKeUser" type="jike.book.pojo.JiKeUser"/>
+    	<typeAlias alias = "Author" type="jike.book.pojo.Author"/>
     </typeAliases>
     
 	<environments default="development">
@@ -27,6 +28,7 @@
     
     <mappers>
     	<mapper resource="jike/book/map/jikeUser.xml"/>
+    	<mapper resource="jike/book/map/author.xml"/>
     	<mapper class="jike.book.map.InterfaceJiKeUserMap"/>
     </mappers>
 </configuration>
