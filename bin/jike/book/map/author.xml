@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jike.book.mapper.CategoryMapper">
+	<insert id="insertAuthor" parameterType="Author" statementType="PREPARED" >
+		insert into Author(userID,realName,IDCard)
+			values(#{jiKeUser.id},#{realName},#{IDCard})
+	</insert>
+	
+	<resultMap id="JiKeAuthorMap" type="Author">
+		<id property="id" column="author.id"/>
+		<result property="realName" column="realName"/>
+		<result property="IDCard" column="IDCard"/>
+		<association property="jiKeUser" column="userID"
+			javaType="JiKeUser">
+				<id property="id" column="jiKeUser.id"/>
+				<result property="userName" column="userName"/>
+				<result property="password" column="password"/>
+		</association>	
+	</resultMap>
+	<resultMap id="JiKeAuthorMapByConstructor" type="Author">
+		<id property="id" column="author.id"/>
+		<result property="realName" column="realName"/>
+		<result property="IDCard" column="IDCard"/>
+		<association property="jiKeUser" column="userID"
+			javaType="JiKeUser">
+				<constructor>
+					<arg column="userName" javaType="String"/>
+					<arg column="password" javaType="String"/>
+				</constructor>
+		</association>	
+	</resultMap>
+	
+	<!-- <select id="selectAuthorJoin" resultMap="JiKeAuthorMap"> -->
+	
+	<select id="selectAuthorJoin" resultMap="JiKeAuthorMapByConstructor">
+		SELECT 
+		    *
+		FROM
+		    author
+		        INNER JOIN
+		    jikeuser ON jikeuser.id = author.userID
+	
+	</select>
+</mapper>
